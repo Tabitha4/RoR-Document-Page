@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <head>
+      <meta charset="utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+      <link rel="stylesheet" type="text/css" href="styles.css"/>
+      <title>Learning Rails Documentation Page</title>
+    </head>
+
+    <nav id="navbar">
+      <header>RoR Documentation</header>
+      <ul>
+        <a class="nav-link" href="#Intro" rel="internal"><li>What is RoR</li></a>
+        <a class="nav-link" href="#What_should_you_know" rel="internal"><li>What should you know</li></a>
+        <a class="nav-link" href="#Installing" rel="internal"><li>Installing Rails</li></a>
+        <a class="nav-link" href="#Server" rel="internal"><li>Starting up the Web Server</li></a>
+        <a class="nav-link" href="#Hello_Rails" rel="internal"><li>Say "Hello", Rails</li></a>
+        <a class="nav-link" href="#Home_page" rel="internal"><li>Setting the App Home Page</li></a>
+        <a class="nav-link" href="#Running" rel="internal"><li>Getting Up and Running</li></a>
+        <a class="nav-link" href="#Groundwork" rel="internal"><li>Lay the Groundwork</li></a>
+        <a class="nav-link" href="#Forms" rel="internal"><li>The First Form</li></a>
+        <a class="nav-link" href="#Articles" rel="internal"><li>Creating Articles </li></a>
+        <a class="nav-link" href="#Model" rel="internal"><li>Creating the Article Model</li></a>
+        <a class="nav-link" href="#Migration" rel="internal"><li>Running a Migration</li></a>
+        <a class="nav-link" href="#Footer_link" rel="internal"><li>Reference</li></a>
+      </ul>
+    </nav>
+
+    <main id="main-doc">
+      <section class="main-section" id="Intro">
+        <header>What is Rails(RoR)?</header>
+        <article>
+          <p>Rails is a web application development framework written in the Ruby programming language. It is designed to make      programming web applications easier by making assumptions about what every developer needs to get started. It allows you to write less code while accomplishing more than many other languages and frameworks. Experienced Rails developers also report that it makes web application development more fun.</p>
+
+          <p>Rails is opinionated software. It makes the assumption that there is a "best" way to do things, and it's designed to encourage that way - and in some cases to discourage alternatives. If you learn "The Rails Way" you'll probably discover a tremendous increase in productivity. If you persist in bringing old habits from other languages to your Rails development, and trying to use patterns you learned elsewhere, you may have a less happy experience.</p>
+
+          <p>The Rails philosophy includes two major guiding principles:</p>
+
+          <li>Don't Repeat Yourself: DRY is a principle of software development which states that "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system." By not writing the same information over and over again, our code is more maintainable, more extensible, and less buggy.</li>
+
+          <li>Convention Over Configuration: Rails has opinions about the best way to do many things in a web application, and defaults to this set of conventions, rather than require that you specify minutiae through endless configuration files.</li>
+        </artice>
+      </section>
+
+      <section class="main-section" id="What_should_you_know">
+        <header>What should you know?</header>
+        <article>
+          <p>This guide is designed for beginners who want to get started with a Rails application from scratch. It does not assume that you have any prior experience with Rails.</p>
+
+          <p>Rails is a web application framework running on the Ruby programming language. If you have no prior experience with Ruby, you will find a very steep learning curve diving straight into Rails. There are several curated lists of online resources for learning Ruby:</p>
+
+          <li><a href="https://www.ruby-lang.org/en/documentation/" target="_blank">Official Ruby Programming Language Website</a></li>
+          <li><a href="https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#ruby" target="_blank">A list of Free Programming Books</a></li>
+
+          <p>Be aware that some resources, while still excellent, cover versions of Ruby as old as 1.6, and commonly 1.8, and will not include some syntax that you will see in day-to-day development with Rails.</p>
+
+        </artice>
+      </section>
+
+      <section class="main-section" id="Installing">
+        <header>Installing Rails</header>
+        <article>
+          <p>Before you install Rails, you should check to make sure that your system has the proper prerequisites installed. These include Ruby and SQLite3.</p>
+
+          <p>Open up a command line prompt. On macOS open Terminal.app, on Windows choose "Run" from your Start menu and type 'cmd.exe'. Any commands prefaced with a dollar sign $ should be run in the command line. Verify that you have a current version of Ruby installed:</p>
+
+          <code>
+            $ ruby -v
+            ruby 2.3.1p112
+          </code>
+
+          <p>Rails requires Ruby version 2.2.2 or later. If the version number returned is less than that number, you'll need to install a fresh copy of Ruby.</p>
+        </article>
+      </section>
+
+      <section class="main-section" id="Server">
+        <header>Starting up the Web Server</header>
+        <article>
+          To begin with, let's get some text up on screen quickly. To do this, you need to get your Rails application server running.
+          You actually have a functional Rails application already. To see it, you need to start a web server on your development machine. You can do this by running the following in the blog directory:
+
+          <code>$ bin/rails server</code>
+
+          <p>If you are using Windows, you have to pass the scripts under the bin folder directly to the Ruby interpreter e.g. ruby bin\rails server.</p>
+
+          <p>Compiling CoffeeScript and JavaScript asset compression requires you have a JavaScript runtime available on your system, in the absence of a runtime you will see an execjs error during asset compilation. Usually macOS and Windows come with a JavaScript runtime installed. Rails adds the mini_racer gem to the generated Gemfile in a commented line for new apps and you can uncomment if you need it. therubyrhino is the recommended runtime for JRuby users and is added by default to the Gemfile in apps generated under JRuby. You can investigate all the supported runtimes at <a href="https://github.com/rails/execjs#readme" target="_blank">ExecJS</a>.</p>
+
+          This will fire up Puma, a web server distributed with Rails by default. To see your application in action, open a browser window and navigate to http://localhost:3000. You should see the Rails default information page.
+        </article>
+      </section>
+
+      <section class="main-section" id="Hello_Rails">
+        <header>Say "Hello", Rails</header>
+        <p>To get Rails saying "Hello", you need to create at minimum a controller and a view.</p>
+
+        <p>A controller's purpose is to receive specific requests for the application. Routing decides which controller receives which requests. Often, there is more than one route to each controller, and different routes can be served by different actions. Each action's purpose is to collect information to provide it to a view.</p>
+
+        <p>A view's purpose is to display this information in a human readable format. An important distinction to make is that it is the controller, not the view, where information is collected. The view should just display that information. By default, view templates are written in a language called eRuby (Embedded Ruby) which is processed by the request cycle in Rails before being sent to the user.</p>
+
+        <p>To create a new controller, you will need to run the "controller" generator and tell it you want a controller called "Welcome" with an action called "index", just like this:</p>
+
+        <code>
+          $ bin/rails generate controller Welcome index
+        </code>
+
+        <p>Rails will create several files and a route for you:</p>
+
+        <code>
+          create app/controllers/welcome_controller.rb
+          route  get 'welcome/index'
+          invoke erb
+          create app/views/welcome
+          create app/views/welcome/index.html.erb
+          invoke test_unit
+          create test/controllers/welcome_controller_test.rb
+          invoke helper
+          create app/helpers/welcome_helper.rb
+          invoke test_unit
+          invoke assets
+          invoke coffee
+          create app/assets/javascripts/welcome.coffee
+          invoke scss
+          create app/assets/stylesheets/welcome.scss
+        </code>
+
+        <p>Most important of these are of course the controller, located at app/controllers/welcome_controller.rb and the view, located at app/views/welcome/index.html.erb.</p>
+
+        <p>Open the app/views/welcome/index.html.erb file in your text editor. Delete all of the existing code in the file, and replace it with the following single line of code:</p>
+
+        <code><h1>Hello, Rails!</h1></code>
+      </section>
+
+      <section class="main-section" id="Home_page">
+        <header>Setting the Homepage</header>
+        <article>
+          <p>Now that we have made the controller and view, we need to tell Rails when we want "Hello, Rails!" to show up. In our case, we want it to show up when we navigate to the root URL of our site, http://localhost:3000. At the moment, "Welcome aboard" is occupying that spot.</p>
+          <p>Next, you have to tell Rails where your actual home page is located.</p>
+
+          <p>Open the file config/routes.rb in your editor.</p>
+
+          <code>
+            Rails.application.routes.draw do
+              get 'welcome/index'
+          </code>
+
+          <p>This is your application's routing file which holds entries in a special DSL (domain-specific language) that tells Rails how to connect incoming requests to controllers and actions. Edit this file by adding the line of code root 'welcome#index'. It should look something like the following:</p>
+
+          <code>
+            Rails.application.routes.draw do
+              get 'welcome/index'
+
+              root 'welcome#index'
+            end
+          </code>
+
+          <p>root 'welcome#index' tells Rails to map requests to the root of the application to the welcome controller's    index action and get 'welcome/index' tells Rails to map requests to http://localhost:3000/welcome/index to the welcome controller's index action. This was created earlier when you ran the controller generator (bin/rails generate controller Welcome index).</p>
+
+          <p>Launch the web server again if you stopped it to generate the controller (bin/rails
+          server) and navigate to http://localhost:3000 in your browser. You'll see the "Hello, Rails!" message you putinto app/views/welcome/index.html.erb, indicating that this new route is indeed going to WelcomeController'sindex action and is rendering the view correctly.</p>
+
+        </article>
+      </section>
+
+      <section class="main-section" id="Running">
+        <header>Getting Up and Running</header>
+        <article>
+          <p>Now that you've seen how to create a controller, an action and a view, let's create something with a bit more substance.</p>
+
+          <p>In the Blog application, you will now create a new resource. A resource is the term used for a collection of similar objects, such as articles, people or animals. You can create, read, update and destroy items for a resource and these operations are referred to as CRUD operations.</p>
+
+          <p>Rails provides a resources method which can be used to declare a standard REST resource. You need to add the article resource to the config/routes.rb so the file will look as follows:</p>
+
+          <code>
+            Rails.application.routes.draw do
+              get 'welcome/index'
+
+              resources :articles
+
+              root 'welcome#index'
+            end
+          </code>
+
+          <p>If you run bin/rails routes, you'll see that it has defined routes for all the standard RESTful actions. The meaning of the prefix column (and other columns) will be seen later, but for now notice that Rails has inferred the singular form article and makes meaningful use of the distinction.</p>
+
+          <code>
+            $ bin/rails routes
+            Prefix Verb   URI Pattern                  Controller#Action
+      welcome_index GET   /welcome/index(.:format)     welcome#index
+           articles GET   /articles(.:format)          articles#index
+                   POST   /articles(.:format)          articles#create
+        new_article GET   /articles/new(.:format)      articles#new
+       edit_article GET   /articles/:id/edit(.:format) articles#edit
+            article GET   /articles/:id(.:format)      articles#show
+                  PATCH   /articles/:id(.:format)      articles#update
+                    PUT   /articles/:id(.:format)      articles#update
+                 DELETE   /articles/:id(.:format)      articles#destroy
+                root GET  /                            welcome#index
+          </code>
+
+          <p>In the next section, you will add the ability to create new articles in your application and be able to view them. This is the "C" and the "R" from CRUD: create and read.</p>
+          <p>It will look a little basic for now, but that's ok. We'll look at improving the styling for it afterwards.</p>
+
+        </article>
+      </section>
+
+      <section class="main-section" id="Groundwork">
+        <header>Laying the Groundwork</header>
+        <article>
+          <p>Firstly, you need a place within the application to create a new article. A great place for that would be at /articles/new. With the route already defined, requests can now be made to /articles/new in the application. Navigate to http://localhost:3000/articles/new and you'll see a routing error:</p>
+
+          <img src="https://res.cloudinary.com/t4bc0d3/image/upload/v1534930428/routing_error_no_controller_lcqd6b.png" alt="Routing error, uninitialized constant ArticlesController" />
+
+          <p>This error occurs because the route needs to have a controller defined in order to serve the request. The solution to this particular problem is simple: create a controller called ArticlesController. You can do this by running this command:</p>
+
+          <code>
+             $ bin/rails generate controller Articles
+          </code>
+
+          <p>If you open up the newly generated app/controllers/articles_controller.rb you'll see a fairly empty controller:</p>
+
+          <code>
+             class ArticlesController < ApplicationController
+             end
+          </code>
+
+          <p>A controller is simply a class that is defined to inherit from ApplicationController. It's inside this class that you'll define methods that will become the actions for this controller. These actions will perform CRUD operations on the articles within our system.</p>
+
+          <p>**There are public, private and protected methods in Ruby, but only public methods can be actions for controllers.</p>
+
+          <p>If you refresh http://localhost:3000/articles/new now, you'll get a new error:</p>
+
+          <img src="https://res.cloudinary.com/t4bc0d3/image/upload/v1534930462/unknown_action_new_for_articles_mazelo.png" alt="Unknown action new for ArticlesController!" />
+
+          <p>This error indicates that Rails cannot find the new action inside the ArticlesController that you just generated. This is because when controllers are generated in Rails they are empty by default, unless you tell it your desired actions during the generation process.</p>
+
+          <p>To manually define an action inside a controller, all you need to do is to define a new method inside the controller. Open app/controllers/articles_controller.rb and inside the ArticlesController class, define the new method so that your controller now looks like this:</p>
+
+          <code>
+            class ArticlesController < ApplicationController
+              def new
+              end
+            end
+          </code>
+
+          <p>With the new method defined in ArticlesController, if you refresh http://localhost:3000/articles/new you'll see another error:</p>
+
+            <img src="http://res.cloudinary.com/t4bc0d3/image/upload/v1534930448/template_is_missing_articles_new_enyuk9.jpg" height="50%" width="50%"/>
+
+            <p>You're getting this error now because Rails expects plain actions like this one to have views associated with them to display their information. With no view available, Rails will raise an exception.</p>
+
+            <p>The simplest template that would work in this case would be one located at app/views/articles/new.html.erb. The extension of this file name is important: the first extension is the format of the template, and the second extension is the handler that will be used to render the template. Rails is attempting to find a template called articles/new within app/views for the application. The format for this template can only be html and the default handler for HTML is erb. Rails uses other handlers for other formats. builder handler is used to build XML templates and coffee handler uses CoffeeScript to build JavaScript templates. Since you want to create a new HTML form, you will be using the ERB language which is designed to embed Ruby in HTML.</p>
+
+            <p>Therefore the file should be called articles/new.html.erb and needs to be located inside the app/views directory of the application.</p>
+
+        </article>
+      </section>
+
+      <section class="main-section" id="Forms">
+        <header>The First Form</header>
+        <article>
+          <p>To create a form within this template, you will use a form builder. The primary form builder for Rails is provided by a helper method called form_with. To use this method, add this code into app/views/articles/new.html.erb:</p>
+
+          <code>
+            <%= form_with scope: :article, local: true do |form| %>
+                <%= form.label :title %><br>
+                <%= form.text_field :title %>
+                <%= form.label :text %><br>
+                <%= form.text_area :text %>
+                <%= form.submit %>
+            <% end %>
+          </code>
+
+          <p>If you refresh the page now, you'll see the exact same form from our example above. Building forms in Rails is really just that easy!</p>
+
+        </article>
+      </section>
+
+      <section class="main-section" id="Articles">
+        <header>Creating Articles</header>
+        <article>
+          <p>To make the "Unknown action" go away, you can define a create action within the ArticlesController class in app/controllers/articles_controller.rb, underneath the  new action, as shown:</p>
+
+          <code>
+            class ArticlesController < ApplicationController
+              def new
+              end
+
+              def create
+              end
+            end
+          </code>
+
+          <p>If you re-submit the form now, you may not see any change on the page. Don't worry! This is because Rails by default returns 204 No Content response for an action if we don't specify what the response should be. We just added the create action but didn't specify anything about how the response should be. In this case, the create action should save our new article to the database.</p>
+
+          <p>If you re-submit the form now, you may not see any change on the page. Don't worry! This is because Rails by default returns 204 No Content response for an action if we don't specify what the response should be. We just added the create action but didn't specify anything about how the response should be. In this case, the create action should save our new article to the database.</p>
+
+        </article>
+      </section>
+
+      <section class="main-section" id="Model">
+        <header>Creating the Article Model</header>
+        <article>
+
+        <p>Models in Rails use a singular name, and their corresponding database tables use a plural name. Rails provides a generator for creating models, which most Rails developers tend to use when creating new models. To create the new model, run this command in your terminal:</p>
+
+        <code>
+          $ bin/rails generate model Article title:string text:text
+        </code>
+
+        <p>With that command we told Rails that we want an Article model, together with a title attribute of type string, and a text attribute of type text. Those attributes are automatically added to the articles table in the database and mapped to the Article model.</p>
+
+        <p>Rails responded by creating a bunch of files. For now, we're only interested in app/models/article.rb and db/migrate/20140120191729_create_articles.rb (your name could be a bit different). The latter is responsible for creating the database structure, which is what we'll look at next.</p>
+
+        <p>Active Record is smart enough to automatically map column names to model attributes, which means you don't have to declare attributes inside Rails models, as that will be done automatically by Active Record.</p>
+
+        </article>
+      </section>
+
+      <section class="main-section" id="Migration">
+        <header>Running a Migration</header>
+        <article>
+
+          <p>As we've just seen, bin/rails generate model created a database migration file inside the db/migrate directory. Migrations are Ruby classes that are designed to make it simple to create and modify database tables. Rails uses rake commands to run migrations, and it's possible to undo a migration after it's been applied to your database. Migration filenames include a timestamp to ensure that they're processed in the order that they were created.</p>
+
+          <p>If you look in the db/migrate/YYYYMMDDHHMMSS_create_articles.rb file (remember, yours will have a slightly different name), here's what you'll find:</p>
+
+          <code>
+            class CreateArticles < ActiveRecord::Migration[5.0]
+              def change
+                create_table :articles do |t|
+                  t.string :title
+                  t.text :text
+
+                  t.timestamps
+                end
+              end
+            end
+          </code>
+
+          <p>The above migration creates a method named change which will be called when you run this migration. The action defined in this method is also reversible, which means Rails knows how to reverse the change made by this migration, in case you want to reverse it later. When you run this migration it will create an articles table with one string column and a text column. It also creates two timestamp fields to allow Rails to track article creation and update times.</p>
+
+          <p>At this point, you can use a bin/rails command to run the migration:</p>
+
+          <code>
+            $ bin/rails db:migrate
+          </code>
+
+          <p>Rails will execute this migration command and tell you it created the Articles table.</p>
+
+          <code>
+            ==  CreateArticles: migrating ==================================================
+            -- create_table(:articles)
+               -> 0.0019s
+            ==  CreateArticles: migrated (0.0020s) =========================================
+          </code>
+
+          <p>Because you're working in the development environment by default, this command will apply to the database defined in the development section of your config/database.yml file. If you would like to execute migrations in another environment, for instance in production, you must explicitly pass it when invoking the command: bin/rails db:migrate RAILS_ENV=production.</p>
+
+        </article>
+      </section>
+      <footer>
+        <p id="Footer_link">All the documentation in this page is taken from <a href="https://rubyonrails.org/" target="_blank">RubyOnRails.org</a></p>
+      </footer>
+    </main>
+
+  </body>
+</html>
